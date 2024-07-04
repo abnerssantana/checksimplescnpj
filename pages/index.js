@@ -142,94 +142,99 @@ export default function Home() {
                         <>
                             <div className="overflow-hidden bg-gray-200 rounded-md p-4 mb-8">
                                 <h3 className="text-gray-900 text-lg font-semibold mb-2">Optantes pelo Simples</h3>
-                                <table className="min-w-full divide-y divide-gray-300">
-                                    <thead>
-                                        <tr className="bg-gray-300">
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                CNPJ
-                                            </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                Razão Social
-                                            </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                Opção pelo Simples
-                                            </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                Data de Opção
-                                            </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                Data de Exclusão
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-gray-300">
-                                        {optantes.map((result, index) => (
-                                            <tr key={index} className="bg-gray-200">
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                    {result['CNPJ']}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {result['Razão Social']}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600">
-                                                    {result['Opção pelo Simples']}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {result['Data de Opção pelo Simples']}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {result['Data de Exclusão do Simples']}
-                                                </td>
+                                <div className="overflow-x-auto">
+                                    <table className="min-w-full divide-y divide-gray-300">
+                                        <thead>
+                                            <tr className="bg-gray-300">
+                                                <th className="px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-900 uppercase tracking-wider">
+                                                    CNPJ
+                                                </th>
+                                                <th className="px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-900 uppercase tracking-wider">
+                                                    Razão Social
+                                                </th>
+                                                <th className="px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-900 uppercase tracking-wider">
+                                                    Opção pelo Simples
+                                                </th>
+                                                <th className="px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-900 uppercase tracking-wider">
+                                                    Data de Opção
+                                                </th>
+                                                <th className="px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-900 uppercase tracking-wider">
+                                                    Data de Exclusão
+                                                </th>
                                             </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody className="divide-y divide-gray-300">
+                                            {optantes.map((result, index) => (
+                                                <tr key={index} className="bg-gray-200">
+                                                    <td className="px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">
+                                                        {result['CNPJ']}
+                                                    </td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
+                                                        {result['Razão Social']}
+                                                    </td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-green-600">
+                                                        {result['Opção pelo Simples']}
+                                                    </td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
+                                                        {result['Data de Opção pelo Simples']}
+                                                    </td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
+                                                        {result['Data de Exclusão do Simples']}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                             <div className="overflow-hidden bg-gray-200 rounded-md p-4">
                                 <h3 className="text-gray-900 text-lg font-semibold mb-2">Não optantes pelo Simples</h3>
-                                <table className="min-w-full divide-y divide-gray-300">
-                                    <thead>
-                                        <tr className="bg-gray-300">
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                CNPJ
-                                            </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                Razão Social
-                                            </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                Opção pelo Simples
-                                            </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                Data de Opção
-                                            </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                Data de Exclusão
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-gray-300">
-                                        {naoOptantes.map((result, index) => (
-                                            <tr key={index} className="bg-gray-200">
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                    {result['CNPJ']}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {result['Razão Social']}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-red-600">
-                                                    {result['Opção pelo Simples']}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {result['Data de Opção pelo Simples']}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {result['Data de Exclusão do Simples']}
-                                                </td>
+                                <div className="overflow-x-auto">
+                                    <table className="min-w-full divide-y divide-gray-300">
+                                        <thead>
+                                            <tr className="bg-gray-300">
+                                                <th className="px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-900 uppercase tracking-wider">
+                                                    CNPJ
+                                                </th>
+                                                <th className="px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-900 uppercase tracking-wider">
+                                                    Razão Social
+                                                </th>
+                                                <th className="px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-900 uppercase tracking-wider">
+                                                    Opção pelo Simples
+                                                </th>
+                                                <th className="px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-900 uppercase tracking-wider">
+                                                    Data de Opção
+                                                </th>
+                                                <th className="px-6 py-3 text-left text-xs sm:text-sm font-medium text-gray-900 uppercase tracking-wider">
+                                                    Data de Exclusão
+                                                </th>
                                             </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody className="divide-y divide-gray-300">
+                                            {naoOptantes.map((result, index) => (
+                                                <tr key={index} className="bg-gray-200">
+                                                    <td className="px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-900">
+                                                        {result['CNPJ']}
+                                                    </td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
+                                                        {result['Razão Social']}
+                                                    </td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-red-600">
+                                                        {result['Opção pelo Simples']}
+                                                    </td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
+                                                        {result['Data de Opção pelo Simples']}
+                                                    </td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-900">
+                                                        {result['Data de Exclusão do Simples']}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
+
                         </>
                     )}
                 </div>
