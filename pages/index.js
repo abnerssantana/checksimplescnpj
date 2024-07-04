@@ -82,8 +82,8 @@ export default function Home() {
 
     return (
         <div className="relative h-full bg-gray-900 py-16">
-            <div className="mx-auto max-w-9xl px-6 lg:px-8">
-                <div className="mb-4 h-full">
+            <div className="mx-auto h-full max-w-9xl px-6 lg:px-8">
+                <div className="mb-4">
                     <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl text-center mb-8">
                         Consulta de CNPJs em Lote
                     </h2>
