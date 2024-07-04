@@ -92,8 +92,8 @@ export default function Home() {
           className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
         />
       </div>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-xl">
+      <div className="mx-auto max-w-9xl px-6 lg:px-8">
+        <div className="max-w-xl">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl text-center mb-8">
             Consulta de CNPJs em Lote
           </h2>
@@ -128,7 +128,7 @@ export default function Home() {
             </p>
           )}
           {results.length > 0 && (
-            <div className="overflow-x-auto bg-gray-800 rounded-md p-4">
+            <div className="overflow-hidden bg-gray-800 rounded-md p-4">
               <h3 className="text-white text-lg font-semibold mb-2">Resultados</h3>
               <table className="min-w-full divide-y divide-gray-700">
                 <thead>
