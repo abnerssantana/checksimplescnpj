@@ -15,7 +15,15 @@ export default function Home() {
         throw new Error('Erro ao buscar CNPJ');
       }
       const result = await response.json();
-      setData(result);
+      // Extrair apenas os campos desejados
+      const extractedData = {
+        nome_fantasia: result.nome_fantasia || 'Não disponível',
+        razao_social: result.razao_social || 'Não disponível',
+        opcao_pelo_simples: result.opcao_pelo_simples || 'Não disponível',
+        data_opcao_pelo_simples: result.data_opcao_pelo_simples || 'Não disponível',
+        data_exclusao_do_simples: result.data_exclusao_do_simples || 'Não disponível',
+      };
+      setData(extractedData);
     } catch (err) {
       setError(err.message);
     }
@@ -23,7 +31,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
+    <div className="relative overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
       <div className="absolute left-1/2 top-0 -z-10 -translate-x-1/2 blur-3xl xl:-top-6">
         <div
           style={{
@@ -34,86 +42,41 @@ export default function Home() {
         />
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
-          <div className="max-w-xl lg:max-w-lg">
-            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Consulta de CNPJ</h2>
-            <div className="mt-6 flex max-w-md gap-x-4">
-              <input
-                type="text"
-                value={cnpj}
-                onChange={(e) => setCnpj(e.target.value)}
-                placeholder="Digite o CNPJ"
-                className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
-              />
-              <button
-                onClick={fetchCNPJ}
-                className="flex-none rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-                disabled={loading}
-              >
-                {loading ? 'Buscando...' : 'Buscar'}
-              </button>
-            </div>
+        <div className="mx-auto max-w-xl">
+          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl text-center mb-8">
+            Consulta de CNPJ
+          </h2>
+          <div className="flex justify-center mb-8">
+            <input
+              type="text"
+              value={cnpj}
+              onChange={(e) => setCnpj(e.target.value)}
+              placeholder="Digite o CNPJ"
+              className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+            />
+            <button
+              onClick={fetchCNPJ}
+              className="ml-4 rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              disabled={loading}
+            >
+              {loading ? 'Buscando...' : 'Buscar'}
+            </button>
           </div>
-          {data && (
-            <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
-              <div className="flex flex-col items-start">
-                <div className="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
-                  <p className="text-white"><strong>Razão Social:</strong> {data.razao_social}</p>
-                  <p className="text-white"><strong>Nome Fantasia:</strong> {data.nome_fantasia}</p>
-                  <p className="text-white"><strong>CNPJ:</strong> {data.cnpj}</p>
-                  <p className="text-white"><strong>UF:</strong> {data.uf}</p>
-                  <p className="text-white"><strong>Município:</strong> {data.municipio}</p>
-                  <p className="text-white"><strong>Bairro:</strong> {data.bairro}</p>
-                  <p className="text-white"><strong>Logradouro:</strong> {data.logradouro}</p>
-                  <p className="text-white"><strong>Número:</strong> {data.numero}</p>
-                  <p className="text-white"><strong>CEP:</strong> {data.cep}</p>
-                  <p className="text-white"><strong>Complemento:</strong> {data.complemento}</p>
-                  <p className="text-white"><strong>Situação Cadastral:</strong> {data.descricao_situacao_cadastral}</p>
-                </div>
-              </div>
-              <div className="flex flex-col items-start">
-                <div className="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
-                  <h3 className="text-white text-lg font-semibold mb-2">Atividades Econômicas</h3>
-                  <p className="text-white"><strong>CNAE Principal:</strong> {data.cnae_fiscal} - {data.cnae_fiscal_descricao}</p>
-                  {data.cnaes_secundarios && data.cnaes_secundarios.length > 0 && (
-                    <div>
-                      <h4 className="text-white text-lg font-semibold mt-2">CNAEs Secundários:</h4>
-                      <ul className="list-disc list-inside">
-                        {data.cnaes_secundarios.map((cnae, index) => (
-                          <li key={index} className="text-white">{cnae.codigo} - {cnae.descricao}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-                <div className="flex flex-col items-start mt-6">
-                  <div className="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
-                    <h3 className="text-white text-lg font-semibold mb-2">Quadro Societário</h3>
-                    {data.qsa && data.qsa.length > 0 ? (
-                      <ul className="list-disc list-inside">
-                        {data.qsa.map((socio, index) => (
-                          <li key={index} className="text-white">
-                            <p><strong>Nome:</strong> {socio.nome_socio}</p>
-                            <p><strong>Qualificação:</strong> {socio.qualificacao_socio}</p>
-                            <p><strong>Faixa Etária:</strong> {socio.faixa_etaria}</p>
-                            <p><strong>Data de Entrada:</strong> {socio.data_entrada_sociedade}</p>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p className="text-white">Sem informações de sócios.</p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-          {error && (
-            <p className="text-white text-center mt-6">
-              Erro ao buscar CNPJ: {error}
-            </p>
-          )}
         </div>
+        {data && (
+          <div className="bg-gray-800 rounded-md p-4">
+            <p className="text-white"><strong>Razão Social:</strong> {data.razao_social}</p>
+            <p className="text-white"><strong>Nome Fantasia:</strong> {data.nome_fantasia}</p>
+            <p className="text-white"><strong>Opção pelo Simples:</strong> {data.opcao_pelo_simples}</p>
+            <p className="text-white"><strong>Data de Opção pelo Simples:</strong> {data.data_opcao_pelo_simples}</p>
+            <p className="text-white"><strong>Data de Exclusão do Simples:</strong> {data.data_exclusao_do_simples}</p>
+          </div>
+        )}
+        {error && (
+          <p className="text-white text-center mt-6">
+            Erro ao buscar CNPJ: {error}
+          </p>
+        )}
       </div>
     </div>
   );
