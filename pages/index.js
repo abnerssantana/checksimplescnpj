@@ -24,7 +24,7 @@ export default function Home() {
     
             // Verifica se há informação sobre a opção pelo Simples Nacional
             const opcaoSimples = result.opcao_pelo_simples;
-            const isOptanteSimples = opcaoSimples === true;
+            const isOptanteSimples = opcaoSimples === true || opcaoSimples === 'true'; // Adicionamos 'true' como string também
     
             return {
                 'CNPJ': cnpj,
@@ -38,7 +38,7 @@ export default function Home() {
                 'Erro': `Erro ao buscar CNPJ: ${err.message}`
             };
         }
-    };
+    };    
     
 
     const handleFetchCNPJs = async () => {
