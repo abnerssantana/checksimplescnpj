@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Head from 'next/head';
+import Head from 'next/head'; // Importe o componente Head do next/head
 import Papa from 'papaparse';
 
 export default function Home() {
@@ -21,19 +21,24 @@ export default function Home() {
             }
             const result = await response.json();
 
+            // Verifica se há informação sobre a opção pelo Simples Nacional
             const opcaoSimples = result.opcao_pelo_simples;
 
+            // Verifica explicitamente se é optante pelo Simples Nacional
             let isOptanteSimples;
             if (opcaoSimples === true || opcaoSimples === 'true') {
                 isOptanteSimples = true;
             } else if (opcaoSimples === false || opcaoSimples === 'false' || opcaoSimples === null) {
-                isOptanteSimples = false;
+                isOptanteSimples = false; // Considera como não optante se for null ou não especificado
             } else {
-                isOptanteSimples = false;
+                isOptanteSimples = false; // Considera como não optante se for qualquer outro valor
             }
 
+            // Truncate CNPJ if it exceeds 42 characters
+            const truncatedCNPJ = cnpj.length > 42 ? `${cnpj.substring(0, 42)}...` : cnpj;
+
             return {
-                'CNPJ': cnpj,
+                'CNPJ': truncatedCNPJ,
                 'Razão Social': result.razao_social || 'Não disponível',
                 'Opção pelo Simples': isOptanteSimples ? 'optante' : 'não optante',
                 'Data de Opção pelo Simples': result.data_opcao_pelo_simples || 'Não disponível',
@@ -54,7 +59,7 @@ export default function Home() {
         try {
             const parsedCsv = await parseCsv(csvFile);
             const promises = parsedCsv.data.map(async (row) => {
-                const cnpj = row[0];
+                const cnpj = row[0]; // Assumindo que o CNPJ está na primeira coluna do CSV
                 const result = await fetchCNPJ(cnpj);
                 return result;
             });
@@ -97,16 +102,16 @@ export default function Home() {
     const naoOptantes = results.filter(result => result['Opção pelo Simples'] === 'não optante');
 
     return (
-        <div className="flex flex-col justify-center items-center h-full bg-gray-100 min-h-screen">
+        <div className="relative bg-gray-100 py-16 h-full min-h-screen">
             <Head>
                 <title>Consulta de CNPJs em Lote</title>
             </Head>
-            <div className="mx-auto max-w-4xl w-full px-6 lg:px-8">
+            <div className="mx-auto h-full max-w-9xl px-6 lg:px-8">
                 <div className="mb-4">
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center mb-8">
                         Consulta de CNPJs em Lote
                     </h2>
-                    <div className="flex flex-col items-center mb-8">
+                    <div className="flex justify-center mb-8">
                         <input
                             type="file"
                             accept=".csv"
@@ -115,7 +120,7 @@ export default function Home() {
                         />
                         <button
                             onClick={handleFetchCNPJs}
-                            className="mt-4 rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+                            className="ml-4 rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                             disabled={!csvFile || loading}
                         >
                             {loading ? 'Buscando...' : 'Buscar CNPJs'}
