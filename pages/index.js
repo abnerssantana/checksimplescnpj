@@ -29,16 +29,16 @@ export default function Home() {
             let isOptanteSimples;
             if (opcaoSimples === true || opcaoSimples === 'true') {
                 isOptanteSimples = true;
-            } else if (opcaoSimples === false || opcaoSimples === 'false') {
-                isOptanteSimples = false;
-            } else {
+            } else if (opcaoSimples === false || opcaoSimples === 'false' || opcaoSimples === null) {
                 isOptanteSimples = false; // Considera como não optante se for null ou não especificado
+            } else {
+                isOptanteSimples = false; // Considera como não optante se for qualquer outro valor
             }
     
             return {
                 'CNPJ': cnpj,
                 'Razão Social': result.razao_social || 'Não disponível',
-                'Opção pelo Simples': opcaoSimples === null ? 'não optante' : (isOptanteSimples ? 'optante' : 'não optante'),
+                'Opção pelo Simples': isOptanteSimples ? 'optante' : 'não optante',
                 'Data de Opção pelo Simples': result.data_opcao_pelo_simples || 'Não disponível',
                 'Data de Exclusão do Simples': result.data_exclusao_do_simples || 'Não disponível',
             };
@@ -48,6 +48,7 @@ export default function Home() {
             };
         }
     };    
+    
 
     const handleFetchCNPJs = async () => {
         setLoading(true);
@@ -168,8 +169,8 @@ export default function Home() {
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                                                 {result['Razão Social']}
                                             </td>
-                                            <td className={`px-6 py-4 whitespace-nowrap text-sm ${result['Opção pelo Simples'] ? 'text-red-500' : 'text-white'}`}>
-                                                {result['Opção pelo Simples'] ? 'optante' : 'não optante'}
+                                            <td className={`px-6 py-4 whitespace-nowrap text-sm ${result['Opção pelo Simples'] === 'optante' ? 'text-red-500' : 'text-white'}`}>
+                                                {result['Opção pelo Simples']}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                                                 {result['Data de Opção pelo Simples']}
