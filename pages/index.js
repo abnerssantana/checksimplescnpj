@@ -82,9 +82,9 @@ export default function Home() {
     };
 
     return (
-        <div className="relative h-dvh bg-gray-900 py-16 sm:py-24 lg:py-32">
+        <div className="relative h-full bg-gray-900 py-16">
             <div className="mx-auto max-w-9xl px-6 lg:px-8">
-                <div className="mb-4">
+                <div className="mb-4 h-full">
                     <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl text-center mb-8">
                         Consulta de CNPJs em Lote
                     </h2>
@@ -104,7 +104,16 @@ export default function Home() {
                         </button>
 
                     </div>
-
+                    {results.length > 0 && (
+                        <div className="flex justify-center mb-8">
+                            <button
+                                onClick={exportToCsv}
+                                className="rounded-md ml-4 bg-green-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500"
+                            >
+                                Exportar Resultados para CSV
+                            </button>
+                        </div>
+                    )}
                     {error && (
                         <p className="text-white text-center mt-6">
                             Erro ao processar o arquivo CSV: {error}
@@ -161,16 +170,6 @@ export default function Home() {
                                     ))}
                                 </tbody>
                             </table>
-                        </div>
-                    )}
-                    {results.length > 0 && (
-                        <div className="flex justify-center mb-8">
-                            <button
-                                onClick={exportToCsv}
-                                className="rounded-md ml-4 bg-green-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500"
-                            >
-                                Exportar Resultados para CSV
-                            </button>
                         </div>
                     )}
                 </div>
