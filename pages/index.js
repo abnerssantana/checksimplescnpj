@@ -24,7 +24,16 @@ export default function Home() {
     
             // Verifica se há informação sobre a opção pelo Simples Nacional
             const opcaoSimples = result.opcao_pelo_simples;
-            const isOptanteSimples = opcaoSimples === true || opcaoSimples === 'true'; // Adicionamos 'true' como string também
+    
+            // Verifica explicitamente se é optante pelo Simples Nacional
+            let isOptanteSimples;
+            if (opcaoSimples === true || opcaoSimples === 'true') {
+                isOptanteSimples = true;
+            } else if (opcaoSimples === false || opcaoSimples === 'false') {
+                isOptanteSimples = false;
+            } else {
+                isOptanteSimples = false; // Considera como não optante se for null ou não especificado
+            }
     
             return {
                 'CNPJ': cnpj,
