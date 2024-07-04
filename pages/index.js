@@ -128,7 +128,7 @@ export default function Home() {
             </p>
           )}
           {results.length > 0 && (
-            <div className="overflow-hidden bg-gray-800 rounded-md p-4">
+            <div className="overflow-x-auto bg-gray-800 rounded-md p-4">
               <h3 className="text-white text-lg font-semibold mb-2">Resultados</h3>
               <table className="min-w-full divide-y divide-gray-700">
                 <thead>
@@ -155,25 +155,15 @@ export default function Home() {
                 </thead>
                 <tbody className="divide-y divide-gray-700">
                   {results.map((result, index) => (
-                    <tr key={index} className="bg-gray-800">
+                    <tr key={index} className="bg-gray-900">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
-                        {cnpjs[index]}
+                        {parsedCsv.data[index][0]}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
-                        {result['Nome Fantasia']}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
-                        {result['Razão Social']}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
-                        {result['Opção pelo Simples']}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
-                        {result['Data de Opção pelo Simples']}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
-                        {result['Data de Exclusão do Simples']}
-                      </td>
+                      {Object.keys(result).map((key) => (
+                        <td key={key} className="px-6 py-4 whitespace-nowrap text-sm text-white">
+                          {result[key]}
+                        </td>
+                      ))}
                     </tr>
                   ))}
                 </tbody>
