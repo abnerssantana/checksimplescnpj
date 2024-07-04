@@ -38,7 +38,7 @@ export default function Home() {
             return {
                 'CNPJ': cnpj,
                 'Razão Social': result.razao_social || 'Não disponível',
-                'Opção pelo Simples': isOptanteSimples ? 'optante' : 'não optante',
+                'Opção pelo Simples': opcaoSimples === null ? 'não optante' : (isOptanteSimples ? 'optante' : 'não optante'),
                 'Data de Opção pelo Simples': result.data_opcao_pelo_simples || 'Não disponível',
                 'Data de Exclusão do Simples': result.data_exclusao_do_simples || 'Não disponível',
             };
@@ -48,7 +48,6 @@ export default function Home() {
             };
         }
     };    
-    
 
     const handleFetchCNPJs = async () => {
         setLoading(true);
