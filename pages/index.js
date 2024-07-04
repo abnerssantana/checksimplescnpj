@@ -93,7 +93,7 @@ export default function Home() {
         />
       </div>
       <div className="mx-auto max-w-9xl px-6 lg:px-8">
-        <div className="max-w-xl">
+        <div className="mb-4">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl text-center mb-8">
             Consulta de CNPJs em Lote
           </h2>
