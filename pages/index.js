@@ -128,7 +128,7 @@ export default function Home() {
             </p>
           )}
           {results.length > 0 && (
-            <div className="bg-gray-800 rounded-md p-4">
+            <div className="overflow-x-auto bg-gray-800 rounded-md p-4">
               <h3 className="text-white text-lg font-semibold mb-2">Resultados</h3>
               <table className="min-w-full divide-y divide-gray-700">
                 <thead>
