@@ -101,7 +101,6 @@ export default function Home() {
                         >
                             {loading ? 'Buscando...' : 'Buscar CNPJs'}
                         </button>
-
                     </div>
                     {results.length > 0 && (
                         <div className="flex justify-center mb-8">
@@ -150,8 +149,8 @@ export default function Home() {
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                                                 {result['Razão Social']}
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
-                                                {result['Opção pelo Simples']}
+                                            <td className={`px-6 py-4 whitespace-nowrap text-sm ${result['Opção pelo Simples'] ? 'text-red-500' : 'text-white'}`}>
+                                                {result['Opção pelo Simples'] ? 'optante' : 'não optante'}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                                                 {result['Data de Opção pelo Simples']}
