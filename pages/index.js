@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Head from 'next/head';
+import Head from 'next/head'; // Importe o componente Head do next/head
 import Papa from 'papaparse';
 
 export default function Home() {
@@ -21,21 +21,21 @@ export default function Home() {
             }
             const result = await response.json();
 
+            // Verifica se há informação sobre a opção pelo Simples Nacional
             const opcaoSimples = result.opcao_pelo_simples;
 
+            // Verifica explicitamente se é optante pelo Simples Nacional
             let isOptanteSimples;
             if (opcaoSimples === true || opcaoSimples === 'true') {
                 isOptanteSimples = true;
             } else if (opcaoSimples === false || opcaoSimples === 'false' || opcaoSimples === null) {
-                isOptanteSimples = false;
+                isOptanteSimples = false; // Considera como não optante se for null ou não especificado
             } else {
-                isOptanteSimples = false;
+                isOptanteSimples = false; // Considera como não optante se for qualquer outro valor
             }
 
-            const truncatedCNPJ = cnpj.length > 42 ? `${cnpj.substring(0, 42)}...` : cnpj;
-
             return {
-                'CNPJ': truncatedCNPJ,
+                'CNPJ': cnpj,
                 'Razão Social': result.razao_social || 'Não disponível',
                 'Opção pelo Simples': isOptanteSimples ? 'optante' : 'não optante',
                 'Data de Opção pelo Simples': result.data_opcao_pelo_simples || 'Não disponível',
@@ -56,7 +56,7 @@ export default function Home() {
         try {
             const parsedCsv = await parseCsv(csvFile);
             const promises = parsedCsv.data.map(async (row) => {
-                const cnpj = row[0];
+                const cnpj = row[0]; // Assumindo que o CNPJ está na primeira coluna do CSV
                 const result = await fetchCNPJ(cnpj);
                 return result;
             });
