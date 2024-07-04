@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Head from 'next/head'; // Importe o componente Head do next/head
 import Papa from 'papaparse';
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
             }
             const result = await response.json();
             return {
+                'CNPJ': cnpj,
                 'Razão Social': result.razao_social || 'Não disponível',
                 'Opção pelo Simples': result.opcao_pelo_simples || 'Não disponível',
                 'Data de Opção pelo Simples': result.data_opcao_pelo_simples || 'Não disponível',
@@ -82,6 +84,9 @@ export default function Home() {
 
     return (
         <div className="relative h-full bg-gray-900 py-16">
+            <Head>
+                <title>Consulta de CNPJs em Lote</title>
+            </Head>
             <div className="mx-auto h-full max-w-9xl px-6 lg:px-8">
                 <div className="mb-4">
                     <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl text-center mb-8">
@@ -144,7 +149,7 @@ export default function Home() {
                                     {results.map((result, index) => (
                                         <tr key={index} className="bg-gray-800">
                                             <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
-                                                {cnpjs[index]}
+                                                {result['CNPJ']}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-sm text-white">
                                                 {result['Razão Social']}
