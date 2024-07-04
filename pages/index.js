@@ -21,10 +21,15 @@ export default function Home() {
                 throw new Error('Erro ao buscar CNPJ');
             }
             const result = await response.json();
+    
+            // Verifica se há informação sobre a opção pelo Simples Nacional
+            const opcaoSimples = result.opcao_pelo_simples;
+            const isOptanteSimples = opcaoSimples === true;
+    
             return {
                 'CNPJ': cnpj,
                 'Razão Social': result.razao_social || 'Não disponível',
-                'Opção pelo Simples': result.opcao_pelo_simples || 'Não disponível',
+                'Opção pelo Simples': isOptanteSimples ? 'optante' : 'não optante',
                 'Data de Opção pelo Simples': result.data_opcao_pelo_simples || 'Não disponível',
                 'Data de Exclusão do Simples': result.data_exclusao_do_simples || 'Não disponível',
             };
@@ -34,6 +39,7 @@ export default function Home() {
             };
         }
     };
+    
 
     const handleFetchCNPJs = async () => {
         setLoading(true);
