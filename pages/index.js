@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Head from 'next/head'; // Importe o componente Head do next/head
+import Head from 'next/head';
 import Papa from 'papaparse';
 
 export default function Home() {
@@ -21,21 +21,15 @@ export default function Home() {
             }
             const result = await response.json();
 
-            // Verifica se há informação sobre a opção pelo Simples Nacional
-            const opcaoSimples = result.opcao_pelo_simples;
-
-            // Verifica explicitamente se é optante pelo Simples Nacional
             let isOptanteSimples;
-            if (opcaoSimples === true || opcaoSimples === 'true') {
+            if (result.opcao_pelo_simples === true || result.opcao_pelo_simples === 'true') {
                 isOptanteSimples = true;
-            } else if (opcaoSimples === false || opcaoSimples === 'false' || opcaoSimples === null) {
-                isOptanteSimples = false; // Considera como não optante se for null ou não especificado
             } else {
-                isOptanteSimples = false; // Considera como não optante se for qualquer outro valor
+                isOptanteSimples = false;
             }
 
             return {
-                'CNPJ': cnpj,
+                'CNPJ': cnpj.length > 40 ? cnpj.substring(0, 40) + '...' : cnpj,
                 'Razão Social': result.razao_social || 'Não disponível',
                 'Opção pelo Simples': isOptanteSimples ? 'optante' : 'não optante',
                 'Data de Opção pelo Simples': result.data_opcao_pelo_simples || 'Não disponível',
@@ -141,7 +135,7 @@ export default function Home() {
                     {results.length > 0 && (
                         <>
                             <div className="overflow-hidden bg-gray-200 rounded-md p-4 mb-8">
-                                <h3 className="text-gray-900 text-lg font-semibold mb-2">Optantes pelo Simples</h3>
+                                <h3 className="text-gray-900 text-lg font-semibold mb-2">Resultados</h3>
                                 <table className="min-w-full divide-y divide-gray-300">
                                     <thead>
                                         <tr className="bg-gray-300">
@@ -163,7 +157,7 @@ export default function Home() {
                                         </tr>
                                     </thead>
                                     <tbody className="divide-y divide-gray-300">
-                                        {optantes.map((result, index) => (
+                                        {results.map((result, index) => (
                                             <tr key={index} className="bg-gray-200">
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                     {result['CNPJ']}
@@ -171,53 +165,12 @@ export default function Home() {
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                                     {result['Razão Social']}
                                                 </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600">
-                                                    {result['Opção pelo Simples']}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {result['Data de Opção pelo Simples']}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {result['Data de Exclusão do Simples']}
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div className="overflow-hidden bg-gray-200 rounded-md p-4">
-                                <h3 className="text-gray-900 text-lg font-semibold mb-2">Não Optantes pelo Simples</h3>
-                                <table className="min-w-full divide-y divide-gray-300">
-                                    <thead>
-                                        <tr className="bg-gray-300">
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                CNPJ
-                                            </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                Razão Social
-                                            </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                Opção pelo Simples
-                                            </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                Data de Opção pelo Simples
-                                            </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                                                Data de Exclusão do Simples
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="divide-y divide-gray-300">
-                                        {naoOptantes.map((result, index) => (
-                                            <tr key={index} className="bg-gray-200">
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                    {result['CNPJ']}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {result['Razão Social']}
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-red-600">
-                                                    {result['Opção pelo Simples']}
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm">
+                                                    {result['Opção pelo Simples'] === 'optante' ? (
+                                                        <span className="text-green-600">optante</span>
+                                                    ) : (
+                                                        <span className="text-red-600">não optante</span>
+                                                    )}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                                     {result['Data de Opção pelo Simples']}
