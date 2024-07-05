@@ -12,9 +12,9 @@ export default function Sobre() {
                     <h2 className="text-3xl font-black tracking-tight text-gray-900 sm:text-4xl text-center mb-8">
                         Sobre o Projeto
                     </h2>
-                    <Link href="/">
-                        <a className="text-indigo-500 hover:text-indigo-700 text-center mb-8">Sobre o Projeto</a>
-                    </Link>
+                    <p className="text-center mb-8"><Link href="/">
+                        <a className="text-indigo-500 hover:text-indigo-700">Voltar</a>
+                    </Link></p>
                     <div className="bg-white rounded-md p-6 shadow-lg">
                         <h3 className="text-xl font-semibold text-gray-800 mb-4">Como usar a página "Check Simples Nacional por CNPJ"</h3>
                         <p className="text-gray-700 mb-4">

@@ -105,11 +105,11 @@ export default function Home() {
             <div className="mx-auto h-full max-w-9xl px-6 lg:px-8">
                 <div className="mb-4">
                     <h2 className="text-3xl font-black tracking-tight text-gray-900 sm:text-4xl text-center mb-8">
-                       Check Simples Nacional por CNPJ
+                        Check Simples Nacional por CNPJ
                     </h2>
-                    <Link href="/sobre">
-                        <a className="text-indigo-500 hover:text-indigo-700 text-center mb-8">Sobre o Projeto</a>
-                    </Link>
+                    <p className="text-center mb-8"><Link href="/sobre">
+                        <a className="text-indigo-500 hover:text-indigo-700">Sobre o projeto</a>
+                    </Link></p>
                     <div className="flex justify-center mb-8">
                         <input
                             type="file"
@@ -125,7 +125,7 @@ export default function Home() {
                             {loading ? 'Buscando...' : 'Buscar CNPJs'}
                         </button>
                     </div>
-                  
+
 
                     {results.length > 0 && (
                         <div className="flex justify-center mb-8">
