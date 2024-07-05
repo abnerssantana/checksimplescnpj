@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import Head from 'next/head';
+import Head from 'next/head'; 
 import Papa from 'papaparse';
-import { FaSearch, FaFileCsv } from 'react-icons/fa';
 
 export default function Home() {
     const [csvFile, setCsvFile] = useState(null);
@@ -22,15 +21,17 @@ export default function Home() {
             }
             const result = await response.json();
 
+            // Verifica se há informação sobre a opção pelo Simples Nacional
             const opcaoSimples = result.opcao_pelo_simples;
 
+            // Verifica explicitamente se é optante pelo Simples Nacional
             let isOptanteSimples;
             if (opcaoSimples === true || opcaoSimples === 'true') {
                 isOptanteSimples = true;
             } else if (opcaoSimples === false || opcaoSimples === 'false' || opcaoSimples === null) {
-                isOptanteSimples = false;
+                isOptanteSimples = false; // Considera como não optante se for null ou não especificado
             } else {
-                isOptanteSimples = false;
+                isOptanteSimples = false; // Considera como não optante se for qualquer outro valor
             }
 
             return {
@@ -55,7 +56,7 @@ export default function Home() {
         try {
             const parsedCsv = await parseCsv(csvFile);
             const promises = parsedCsv.data.map(async (row) => {
-                const cnpj = row[0];
+                const cnpj = row[0]; // Assumindo que o CNPJ está na primeira coluna do CSV
                 const result = await fetchCNPJ(cnpj);
                 return result;
             });
@@ -119,7 +120,7 @@ export default function Home() {
                             className="ml-4 rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                             disabled={!csvFile || loading}
                         >
-                            {loading ? <FaSearch className="inline-block mr-2" /> : 'Buscar CNPJs'}
+                            {loading ? 'Buscando...' : 'Buscar CNPJs'}
                         </button>
                     </div>
                     {results.length > 0 && (
@@ -128,7 +129,7 @@ export default function Home() {
                                 onClick={exportToCsv}
                                 className="rounded-md ml-4 bg-green-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500"
                             >
-                                <FaFileCsv className="inline-block mr-2" /> Exportar Resultados para CSV
+                                Exportar Resultados para CSV
                             </button>
                         </div>
                     )}
@@ -233,6 +234,7 @@ export default function Home() {
                                     </table>
                                 </div>
                             </div>
+
                         </>
                     )}
                 </div>
