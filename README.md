@@ -39,14 +39,14 @@
 
 ### Exemplo de uso
 
-1.  **Selecione um arquivo CSV:** ![Selecionar arquivo CSV](#)
+1.  **Selecione um arquivo CSV:** Selecionar arquivo CSV
 
-2.  **Clique em "Buscar CNPJs":** ![Buscar CNPJs](#)
+2.  **Clique em "Buscar CNPJs":** Buscar CNPJs
 
-3.  **Visualize os resultados:** ![Resultados da busca](#)
+3.  **Visualize os resultados:** Resultados da busca
 
-4.  **Exporte os resultados para CSV:** ![Exportar CSV](#)
-
+4.  **Exporte os resultados para CSV:** Exportar CSV
+5.  
 ### Considerações finais
 
 Essa página é uma ferramenta prática para verificar a situação de CNPJs em relação ao Simples Nacional, permitindo que os usuários carreguem uma lista de CNPJs, busquem suas informações e exportem os resultados para um arquivo CSV. Certifique-se de carregar um arquivo CSV com o formato correto para garantir que a busca funcione corretamente.
