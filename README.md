@@ -1,4 +1,6 @@
-### Como usar a página "Check CNPJ"
+### Como usar a página "Check Simples Nacional por CNPJ"
+
+![Check Simples Nacional por CNPJ](cnpsimples.png)
 
 #### 1\. Carregar um arquivo CSV
 
