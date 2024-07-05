@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import Head from 'next/head'; 
+import Head from 'next/head';
 import Papa from 'papaparse';
+import Link from 'next/link';
 
 export default function Home() {
     const [csvFile, setCsvFile] = useState(null);
@@ -20,7 +21,7 @@ export default function Home() {
                 throw new Error('Erro ao buscar CNPJ');
             }
             const result = await response.json();
-            
+
             const opcaoSimples = result.opcao_pelo_simples;
 
             let isOptanteSimples;
@@ -99,13 +100,16 @@ export default function Home() {
     return (
         <div className="relative bg-gray-100 py-16 min-h-screen">
             <Head>
-                <title>Check CNPJ</title>
+                <title>Check Simples Nacional por CNPJ</title>
             </Head>
             <div className="mx-auto h-full max-w-9xl px-6 lg:px-8">
                 <div className="mb-4">
                     <h2 className="text-3xl font-black tracking-tight text-gray-900 sm:text-4xl text-center mb-8">
-                        CHECK CNPJ
+                       Check Simples Nacional por CNPJ
                     </h2>
+                    <Link href="/about">
+                        <a className="text-indigo-500 hover:text-indigo-700">Sobre o Projeto</a>
+                    </Link>
                     <div className="flex justify-center mb-8">
                         <input
                             type="file"
@@ -121,6 +125,8 @@ export default function Home() {
                             {loading ? 'Buscando...' : 'Buscar CNPJs'}
                         </button>
                     </div>
+                  
+
                     {results.length > 0 && (
                         <div className="flex justify-center mb-8">
                             <button
