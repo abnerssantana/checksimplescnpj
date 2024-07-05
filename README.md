@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Como usar a página "Check CNPJ"
 
-## Getting Started
+#### 1\. Carregar um arquivo CSV
 
-First, run the development server:
+-   **Descrição:** No início da página, você verá um botão para selecionar um arquivo. Esse botão aceita arquivos no formato `.csv`.
+-   **Instruções:** Clique no botão "Escolher arquivo" e selecione um arquivo CSV do seu computador que contenha uma lista de CNPJs. O arquivo deve ter apenas uma coluna com os CNPJs.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+#### 2\. Buscar informações dos CNPJs
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-   **Descrição:** Após selecionar o arquivo CSV, você pode clicar no botão "Buscar CNPJs" para iniciar a busca das informações dos CNPJs.
+-   **Instruções:** Clique no botão "Buscar CNPJs". Isso iniciará a busca das informações de cada CNPJ na API `https://minhareceita.org/{cnpj}`.
+-   **Feedback:** Durante a busca, o botão exibirá o texto "Buscando..." e ficará desabilitado até que a busca seja concluída. Se houver algum erro durante o processo, uma mensagem de erro será exibida.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### 3\. Visualizar os resultados
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+-   **Descrição:** Após a busca ser concluída, os resultados serão exibidos na página. Os CNPJs serão classificados em duas categorias: "Optantes pelo Simples" e "Não optantes pelo Simples".
+-   **Instruções:** Verifique as tabelas que aparecerão abaixo do botão de busca. Cada tabela contém informações como CNPJ, Razão Social, Opção pelo Simples, Data de Opção pelo Simples e Data de Exclusão do Simples.
 
-## Learn More
+#### 4\. Exportar resultados para CSV
 
-To learn more about Next.js, take a look at the following resources:
+-   **Descrição:** Se desejar salvar os resultados em um arquivo CSV, você pode usar o botão "Exportar Resultados para CSV".
+-   **Instruções:** Clique no botão "Exportar Resultados para CSV". Um arquivo CSV contendo todos os resultados será gerado e baixado automaticamente para o seu computador.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Estrutura do código
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1.  **Estados do componente:**
 
-## Deploy on Vercel
+    -   `csvFile`: Armazena o arquivo CSV carregado pelo usuário.
+    -   `results`: Armazena os resultados da busca dos CNPJs.
+    -   `loading`: Indica se a busca está em andamento.
+    -   `error`: Armazena qualquer mensagem de erro que possa ocorrer durante a busca.
+2.  **Funções principais:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    -   `handleFileChange`: Atualiza o estado `csvFile` quando um arquivo CSV é carregado.
+    -   `fetchCNPJ`: Faz uma chamada à API para buscar as informações de um CNPJ específico.
+    -   `handleFetchCNPJs`: Lê o arquivo CSV, chama a função `fetchCNPJ` para cada CNPJ e atualiza o estado `results` com os resultados.
+    -   `parseCsv`: Usa a biblioteca `PapaParse` para ler o conteúdo do arquivo CSV.
+    -   `exportToCsv`: Gera e baixa um arquivo CSV com os resultados da busca.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Exemplo de uso
+
+1.  **Selecione um arquivo CSV:** ![Selecionar arquivo CSV](#)
+
+2.  **Clique em "Buscar CNPJs":** ![Buscar CNPJs](#)
+
+3.  **Visualize os resultados:** ![Resultados da busca](#)
+
+4.  **Exporte os resultados para CSV:** ![Exportar CSV](#)
+
+### Considerações finais
+
+Essa página é uma ferramenta prática para verificar a situação de CNPJs em relação ao Simples Nacional, permitindo que os usuários carreguem uma lista de CNPJs, busquem suas informações e exportem os resultados para um arquivo CSV. Certifique-se de carregar um arquivo CSV com o formato correto para garantir que a busca funcione corretamente.
