@@ -1,20 +1,24 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Sobre() {
     return (
         <div className="relative bg-gray-100 py-16 min-h-screen">
             <Head>
-                <title>Sobre o Projeto - Check CNPJ</title>
+                <title>Sobre o Projeto</title>
             </Head>
             <div className="mx-auto h-full max-w-9xl px-6 lg:px-8">
                 <div className="mb-4">
                     <h2 className="text-3xl font-black tracking-tight text-gray-900 sm:text-4xl text-center mb-8">
-                        Sobre o Projeto - Check CNPJ
+                        Sobre o Projeto
                     </h2>
+                    <Link href="/">
+                        <a className="text-indigo-500 hover:text-indigo-700 text-center mb-8">Sobre o Projeto</a>
+                    </Link>
                     <div className="bg-white rounded-md p-6 shadow-lg">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-4">Como usar a página "Check CNPJ"</h3>
+                        <h3 className="text-xl font-semibold text-gray-800 mb-4">Como usar a página "Check Simples Nacional por CNPJ"</h3>
                         <p className="text-gray-700 mb-4">
-                            A página "Check CNPJ" é um aplicativo React que permite aos usuários carregar um arquivo CSV contendo uma lista de CNPJs, buscar informações desses CNPJs em uma API, exibir os resultados e exportá-los de volta para um arquivo CSV.
+                            A página "Check Simples Nacional por CNPJ" é um aplicativo React que permite aos usuários carregar um arquivo CSV contendo uma lista de CNPJs, buscar informações desses CNPJs em uma API, exibir os resultados e exportá-los de volta para um arquivo CSV.
                         </p>
 
                         <h4 className="text-lg font-semibold text-gray-800 mb-2">1. Carregar um arquivo CSV</h4>
@@ -26,7 +30,7 @@ export default function Sobre() {
                         <h4 className="text-lg font-semibold text-gray-800 mb-2">2. Buscar informações dos CNPJs</h4>
                         <p className="text-gray-700 mb-4">
                             <strong>Descrição:</strong> Após selecionar o arquivo CSV, você pode clicar no botão "Buscar CNPJs" para iniciar a busca das informações dos CNPJs.<br />
-                            <strong>Instruções:</strong> Clique no botão "Buscar CNPJs". Isso iniciará a busca das informações de cada CNPJ na API https://minhareceita.org.<br />
+                            <strong>Instruções:</strong> Clique no botão "Buscar CNPJs". Isso iniciará a busca das informações de cada CNPJ na API https://minhareceita.org<br />
                             <strong>Feedback:</strong> Durante a busca, o botão exibirá o texto "Buscando..." e ficará desabilitado até que a busca seja concluída. Se houver algum erro durante o processo, uma mensagem de erro será exibida.
                         </p>
 

@@ -108,7 +108,7 @@ export default function Home() {
                        Check Simples Nacional por CNPJ
                     </h2>
                     <Link href="/sobre">
-                        <a className="text-indigo-500 hover:text-indigo-700">Sobre o Projeto</a>
+                        <a className="text-indigo-500 hover:text-indigo-700 text-center mb-8">Sobre o Projeto</a>
                     </Link>
                     <div className="flex justify-center mb-8">
                         <input
