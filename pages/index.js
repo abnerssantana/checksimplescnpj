@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Head from 'next/head';
 import Papa from 'papaparse';
 import Link from 'next/link';
+import ReactTooltip from 'react-tooltip';
 
 export default function Home() {
     const [csvFile, setCsvFile] = useState(null);
@@ -108,7 +109,7 @@ export default function Home() {
                         Check Simples Nacional por CNPJ
                     </h2>
                     <p className="text-center mb-8"><Link href="/sobre">
-                        <a className="text-indigo-500 hover:text-indigo-700">Sobre o projeto</a>
+                        <a className="text-indigo-500 font-medium hover:text-indigo-700">Sobre o projeto</a>
                     </Link></p>
                     <div className="flex justify-center mb-8">
                         <input
@@ -116,22 +117,25 @@ export default function Home() {
                             accept=".csv"
                             onChange={handleFileChange}
                             className="min-w-0 flex-auto rounded-md border-0 bg-gray-200 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                            data-tip="Selecione um arquivo CSV contendo os CNPJs"
                         />
                         <button
                             onClick={handleFetchCNPJs}
                             className="ml-4 rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                             disabled={!csvFile || loading}
+                            data-tip="Clique para buscar os dados dos CNPJs no arquivo"
                         >
                             {loading ? 'Buscando...' : 'Buscar CNPJs'}
                         </button>
                     </div>
-
+                    <ReactTooltip />
 
                     {results.length > 0 && (
                         <div className="flex justify-center mb-8">
                             <button
                                 onClick={exportToCsv}
                                 className="rounded-md ml-4 bg-green-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500"
+                                data-tip="Clique para exportar os resultados para um arquivo CSV"
                             >
                                 Exportar Resultados para CSV
                             </button>
@@ -238,7 +242,6 @@ export default function Home() {
                                     </table>
                                 </div>
                             </div>
-
                         </>
                     )}
                 </div>

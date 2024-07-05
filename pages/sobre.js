@@ -13,7 +13,7 @@ export default function Sobre() {
                         Sobre o Projeto
                     </h2>
                     <p className="text-center mb-8"><Link href="/">
-                        <a className="text-indigo-500 hover:text-indigo-700">Voltar</a>
+                        <a className="font-medium text-indigo-500 hover:text-indigo-700">Voltar</a>
                     </Link></p>
                     <div className="bg-white rounded-md p-6 shadow-lg">
                         <h3 className="text-xl font-semibold text-gray-800 mb-4">Como usar a página "Check Simples Nacional por CNPJ"</h3>
