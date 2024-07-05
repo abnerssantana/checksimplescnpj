@@ -26,7 +26,7 @@ export default function Sobre() {
                         <h4 className="text-lg font-semibold text-gray-800 mb-2">2. Buscar informações dos CNPJs</h4>
                         <p className="text-gray-700 mb-4">
                             <strong>Descrição:</strong> Após selecionar o arquivo CSV, você pode clicar no botão "Buscar CNPJs" para iniciar a busca das informações dos CNPJs.<br />
-                            <strong>Instruções:</strong> Clique no botão "Buscar CNPJs". Isso iniciará a busca das informações de cada CNPJ na API `https://minhareceita.org/{cnpj}`.<br />
+                            <strong>Instruções:</strong> Clique no botão "Buscar CNPJs". Isso iniciará a busca das informações de cada CNPJ na API https://minhareceita.org.<br />
                             <strong>Feedback:</strong> Durante a busca, o botão exibirá o texto "Buscando..." e ficará desabilitado até que a busca seja concluída. Se houver algum erro durante o processo, uma mensagem de erro será exibida.
                         </p>
 
