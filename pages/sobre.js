@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-export default function About() {
+export default function Sobre() {
     return (
         <div className="relative bg-gray-100 py-16 min-h-screen">
             <Head>
