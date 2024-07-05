@@ -20,18 +20,16 @@ export default function Home() {
                 throw new Error('Erro ao buscar CNPJ');
             }
             const result = await response.json();
-
-            // Verifica se há informação sobre a opção pelo Simples Nacional
+            
             const opcaoSimples = result.opcao_pelo_simples;
 
-            // Verifica explicitamente se é optante pelo Simples Nacional
             let isOptanteSimples;
             if (opcaoSimples === true || opcaoSimples === 'true') {
                 isOptanteSimples = true;
             } else if (opcaoSimples === false || opcaoSimples === 'false' || opcaoSimples === null) {
-                isOptanteSimples = false; // Considera como não optante se for null ou não especificado
+                isOptanteSimples = false;
             } else {
-                isOptanteSimples = false; // Considera como não optante se for qualquer outro valor
+                isOptanteSimples = false;
             }
 
             return {
@@ -56,7 +54,7 @@ export default function Home() {
         try {
             const parsedCsv = await parseCsv(csvFile);
             const promises = parsedCsv.data.map(async (row) => {
-                const cnpj = row[0]; // Assumindo que o CNPJ está na primeira coluna do CSV
+                const cnpj = row[0];
                 const result = await fetchCNPJ(cnpj);
                 return result;
             });
@@ -101,7 +99,7 @@ export default function Home() {
     return (
         <div className="relative bg-gray-100 py-16 min-h-screen">
             <Head>
-                <title>Consulta de CNPJs em Lote</title>
+                <title>Check CNPJ</title>
             </Head>
             <div className="mx-auto h-full max-w-9xl px-6 lg:px-8">
                 <div className="mb-4">
