@@ -16,26 +16,26 @@ export default function About() {
                         <p className="text-gray-700 mb-4">
                             A página "Check CNPJ" é um aplicativo React que permite aos usuários carregar um arquivo CSV contendo uma lista de CNPJs, buscar informações desses CNPJs em uma API, exibir os resultados e exportá-los de volta para um arquivo CSV.
                         </p>
-                        
+
                         <h4 className="text-lg font-semibold text-gray-800 mb-2">1. Carregar um arquivo CSV</h4>
                         <p className="text-gray-700 mb-4">
                             <strong>Descrição:</strong> No início da página, você verá um botão para selecionar um arquivo. Esse botão aceita arquivos no formato `.csv`.<br />
                             <strong>Instruções:</strong> Clique no botão "Escolher arquivo" e selecione um arquivo CSV do seu computador que contenha uma lista de CNPJs. O arquivo deve ter apenas uma coluna com os CNPJs.
                         </p>
-                        
+
                         <h4 className="text-lg font-semibold text-gray-800 mb-2">2. Buscar informações dos CNPJs</h4>
                         <p className="text-gray-700 mb-4">
                             <strong>Descrição:</strong> Após selecionar o arquivo CSV, você pode clicar no botão "Buscar CNPJs" para iniciar a busca das informações dos CNPJs.<br />
                             <strong>Instruções:</strong> Clique no botão "Buscar CNPJs". Isso iniciará a busca das informações de cada CNPJ na API `https://minhareceita.org/{cnpj}`.<br />
                             <strong>Feedback:</strong> Durante a busca, o botão exibirá o texto "Buscando..." e ficará desabilitado até que a busca seja concluída. Se houver algum erro durante o processo, uma mensagem de erro será exibida.
                         </p>
-                        
+
                         <h4 className="text-lg font-semibold text-gray-800 mb-2">3. Visualizar os resultados</h4>
                         <p className="text-gray-700 mb-4">
                             <strong>Descrição:</strong> Após a busca ser concluída, os resultados serão exibidos na página. Os CNPJs serão classificados em duas categorias: "Optantes pelo Simples" e "Não optantes pelo Simples".<br />
                             <strong>Instruções:</strong> Verifique as tabelas que aparecerão abaixo do botão de busca. Cada tabela contém informações como CNPJ, Razão Social, Opção pelo Simples, Data de Opção pelo Simples e Data de Exclusão do Simples.
                         </p>
-                        
+
                         <h4 className="text-lg font-semibold text-gray-800 mb-2">4. Exportar resultados para CSV</h4>
                         <p className="text-gray-700 mb-4">
                             <strong>Descrição:</strong> Se desejar salvar os resultados em um arquivo CSV, você pode usar o botão "Exportar Resultados para CSV".<br />
@@ -50,7 +50,7 @@ export default function About() {
                             - `loading`: Indica se a busca está em andamento.<br />
                             - `error`: Armazena qualquer mensagem de erro que possa ocorrer durante a busca.
                         </p>
-                        
+
                         <p className="text-gray-700 mb-4">
                             <strong>Funções principais:</strong><br />
                             - `handleFileChange`: Atualiza o estado `csvFile` quando um arquivo CSV é carregado.<br />
@@ -59,23 +59,23 @@ export default function About() {
                             - `parseCsv`: Usa a biblioteca `PapaParse` para ler o conteúdo do arquivo CSV.<br />
                             - `exportToCsv`: Gera e baixa um arquivo CSV com os resultados da busca.
                         </p>
-                        
+
                         <h3 className="text-xl font-semibold text-gray-800 mb-4">Exemplo de uso</h3>
                         <p className="text-gray-700 mb-4">
                             <strong>Selecione um arquivo CSV:</strong><br />
-                            ![Selecionar arquivo CSV](#)
+                            Selecionar arquivo CSV
                         </p>
                         <p className="text-gray-700 mb-4">
                             <strong>Clique em "Buscar CNPJs":</strong><br />
-                            ![Buscar CNPJs](#)
+                            Buscar CNPJs
                         </p>
                         <p className="text-gray-700 mb-4">
                             <strong>Visualize os resultados:</strong><br />
-                            ![Resultados da busca](#)
+                            Resultados da busca
                         </p>
                         <p className="text-gray-700 mb-4">
                             <strong>Exporte os resultados para CSV:</strong><br />
-                            ![Exportar CSV](#)
+                            Exportar CSV
                         </p>
 
                         <h3 className="text-xl font-semibold text-gray-800 mb-4">Considerações finais</h3>
