@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Head from 'next/head';
 import Papa from 'papaparse';
 import Link from 'next/link';
-import ReactTooltip from 'react-tooltip';
+import { Tooltip } from 'react-tooltip'
 
 export default function Home() {
     const [csvFile, setCsvFile] = useState(null);
@@ -128,7 +128,7 @@ export default function Home() {
                             {loading ? 'Buscando...' : 'Buscar CNPJs'}
                         </button>
                     </div>
-                    <ReactTooltip />
+                    <Tooltip />
 
                     {results.length > 0 && (
                         <div className="flex justify-center mb-8">
