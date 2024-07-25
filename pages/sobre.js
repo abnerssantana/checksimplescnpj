@@ -16,34 +16,34 @@ export default function Sobre() {
                         <a className="font-medium text-indigo-500 hover:text-indigo-700">Voltar</a>
                     </Link></p>
                     <div className="bg-white rounded-md p-6 shadow-lg">
-                        <h3 className="text-xl font-semibold text-gray-800 mb-4">Como usar a página "Check Simples Nacional por CNPJ"</h3>
+                        <h3 className="text-xl font-semibold text-gray-800 mb-4">Como usar a página &quot;Check Simples Nacional por CNPJ&quot;</h3>
                         <p className="text-gray-700 mb-4">
-                            A página "Check Simples Nacional por CNPJ" é um aplicativo React que permite aos usuários carregar um arquivo CSV contendo uma lista de CNPJs, buscar informações desses CNPJs em uma API, exibir os resultados e exportá-los de volta para um arquivo CSV.
+                            A página &quot;Check Simples Nacional por CNPJ&quot; é um aplicativo React que permite aos usuários carregar um arquivo CSV contendo uma lista de CNPJs, buscar informações desses CNPJs em uma API, exibir os resultados e exportá-los de volta para um arquivo CSV.
                         </p>
 
                         <h4 className="text-lg font-semibold text-gray-800 mb-2">1. Carregar um arquivo CSV</h4>
                         <p className="text-gray-700 mb-4">
                             <strong>Descrição:</strong> No início da página, você verá um botão para selecionar um arquivo. Esse botão aceita arquivos no formato `.csv`.<br />
-                            <strong>Instruções:</strong> Clique no botão "Escolher arquivo" e selecione um arquivo CSV do seu computador que contenha uma lista de CNPJs. O arquivo deve ter apenas uma coluna com os CNPJs.
+                            <strong>Instruções:</strong> Clique no botão &quot;Escolher arquivo&quot; e selecione um arquivo CSV do seu computador que contenha uma lista de CNPJs. O arquivo deve ter apenas uma coluna com os CNPJs.
                         </p>
 
                         <h4 className="text-lg font-semibold text-gray-800 mb-2">2. Buscar informações dos CNPJs</h4>
                         <p className="text-gray-700 mb-4">
-                            <strong>Descrição:</strong> Após selecionar o arquivo CSV, você pode clicar no botão "Buscar CNPJs" para iniciar a busca das informações dos CNPJs.<br />
-                            <strong>Instruções:</strong> Clique no botão "Buscar CNPJs". Isso iniciará a busca das informações de cada CNPJ na API https://minhareceita.org<br />
-                            <strong>Feedback:</strong> Durante a busca, o botão exibirá o texto "Buscando..." e ficará desabilitado até que a busca seja concluída. Se houver algum erro durante o processo, uma mensagem de erro será exibida.
+                            <strong>Descrição:</strong> Após selecionar o arquivo CSV, você pode clicar no botão &quot;Buscar CNPJs&quot; para iniciar a busca das informações dos CNPJs.<br />
+                            <strong>Instruções:</strong> Clique no botão &quot;Buscar CNPJs&quot;. Isso iniciará a busca das informações de cada CNPJ na API https://minhareceita.org<br />
+                            <strong>Feedback:</strong> Durante a busca, o botão exibirá o texto &quot;Buscando...&quot; e ficará desabilitado até que a busca seja concluída. Se houver algum erro durante o processo, uma mensagem de erro será exibida.
                         </p>
 
                         <h4 className="text-lg font-semibold text-gray-800 mb-2">3. Visualizar os resultados</h4>
                         <p className="text-gray-700 mb-4">
-                            <strong>Descrição:</strong> Após a busca ser concluída, os resultados serão exibidos na página. Os CNPJs serão classificados em duas categorias: "Optantes pelo Simples" e "Não optantes pelo Simples".<br />
+                            <strong>Descrição:</strong> Após a busca ser concluída, os resultados serão exibidos na página. Os CNPJs serão classificados em duas categorias: &quot;Optantes pelo Simples&quot; e &quot;Não optantes pelo Simples&quot;.<br />
                             <strong>Instruções:</strong> Verifique as tabelas que aparecerão abaixo do botão de busca. Cada tabela contém informações como CNPJ, Razão Social, Opção pelo Simples, Data de Opção pelo Simples e Data de Exclusão do Simples.
                         </p>
 
                         <h4 className="text-lg font-semibold text-gray-800 mb-2">4. Exportar resultados para CSV</h4>
                         <p className="text-gray-700 mb-4">
-                            <strong>Descrição:</strong> Se desejar salvar os resultados em um arquivo CSV, você pode usar o botão "Exportar Resultados para CSV".<br />
-                            <strong>Instruções:</strong> Clique no botão "Exportar Resultados para CSV". Um arquivo CSV contendo todos os resultados será gerado e baixado automaticamente para o seu computador.
+                            <strong>Descrição:</strong> Se desejar salvar os resultados em um arquivo CSV, você pode usar o botão &quot;Exportar Resultados para CSV&quot;.<br />
+                            <strong>Instruções:</strong> Clique no botão &quot;Exportar Resultados para CSV&quot;. Um arquivo CSV contendo todos os resultados será gerado e baixado automaticamente para o seu computador.
                         </p>
 
                         <h3 className="text-xl font-semibold text-gray-800 mb-4">Estrutura do código</h3>
@@ -70,7 +70,7 @@ export default function Sobre() {
                             Selecionar arquivo CSV
                         </p>
                         <p className="text-gray-700 mb-4">
-                            <strong>Clique em "Buscar CNPJs":</strong><br />
+                            <strong>Clique em &quot;Buscar CNPJs&quot;:</strong><br />
                             Buscar CNPJs
                         </p>
                         <p className="text-gray-700 mb-4">
