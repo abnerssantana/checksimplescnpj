@@ -108,7 +108,7 @@ export default function Home() {
                         Check Simples Nacional por CNPJ
                     </h2>
                     <p className="text-center mb-8"><Link href="/cnpjs.csv">
-                        <a className="text-indigo-500 font-medium hover:text-indigo-700">Download modelo do CSV</a>
+                        <a className="mr-4 text-indigo-500 font-medium hover:text-indigo-700">Download modelo do CSV</a>
                     </Link><Link href="/sobre">
                         <a className="text-indigo-500 font-medium hover:text-indigo-700">Sobre o projeto</a>
                     </Link></p>
