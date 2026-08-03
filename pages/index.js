@@ -3,6 +3,26 @@ import Head from 'next/head';
 import Papa from 'papaparse';
 import Link from 'next/link';
 
+// Papa.unparse deriva o cabeçalho do primeiro objeto do array, então todas as
+// linhas precisam ter exatamente estas chaves — inclusive as que falharam.
+const COLUNAS = [
+    'CNPJ',
+    'Razão Social',
+    'Opção pelo Simples',
+    'Data de Opção pelo Simples',
+    'Data de Exclusão do Simples',
+    'Erro',
+];
+
+const linhaComErro = (cnpj, mensagem) => ({
+    'CNPJ': cnpj,
+    'Razão Social': 'Não disponível',
+    'Opção pelo Simples': 'não verificado',
+    'Data de Opção pelo Simples': 'Não disponível',
+    'Data de Exclusão do Simples': 'Não disponível',
+    'Erro': mensagem,
+});
+
 export default function Home() {
     const [csvFile, setCsvFile] = useState(null);
     const [results, setResults] = useState([]);
@@ -18,7 +38,7 @@ export default function Home() {
         try {
             const response = await fetch(`https://minhareceita.org/${cnpj}`);
             if (!response.ok) {
-                throw new Error('Erro ao buscar CNPJ');
+                throw new Error(`a consulta retornou HTTP ${response.status}`);
             }
             const result = await response.json();
 
@@ -39,11 +59,10 @@ export default function Home() {
                 'Opção pelo Simples': isOptanteSimples ? 'optante' : 'não optante',
                 'Data de Opção pelo Simples': result.data_opcao_pelo_simples || 'Não disponível',
                 'Data de Exclusão do Simples': result.data_exclusao_do_simples || 'Não disponível',
+                'Erro': '',
             };
         } catch (err) {
-            return {
-                'Erro': `Erro ao buscar CNPJ: ${err.message}`
-            };
+            return linhaComErro(cnpj, `Erro ao buscar CNPJ: ${err.message}`);
         }
     };
 
@@ -54,13 +73,18 @@ export default function Home() {
 
         try {
             const parsedCsv = await parseCsv(csvFile);
-            const promises = parsedCsv.data.map(async (row) => {
-                const cnpj = row[0];
-                const result = await fetchCNPJ(cnpj);
-                return result;
-            });
+            // Remove o BOM que o Excel grava no início do arquivo e descarta
+            // linhas em branco ou de cabeçalho — sem isso elas viram consultas
+            // inválidas na API e poluem o resultado.
+            const cnpjs = parsedCsv.data
+                .map((row) => String(row[0] ?? '').replace(/^\uFEFF/, '').trim())
+                .filter((cnpj) => cnpj.replace(/\D/g, '').length === 14);
 
-            const results = await Promise.all(promises);
+            if (cnpjs.length === 0) {
+                throw new Error('nenhum CNPJ válido encontrado no arquivo.');
+            }
+
+            const results = await Promise.all(cnpjs.map(fetchCNPJ));
             setResults(results);
         } catch (err) {
             setError(err.message);
@@ -72,6 +96,7 @@ export default function Home() {
     const parseCsv = (file) => {
         return new Promise((resolve, reject) => {
             Papa.parse(file, {
+                skipEmptyLines: true,
                 complete: (result) => {
                     resolve(result);
                 },
@@ -83,8 +108,9 @@ export default function Home() {
     };
 
     const exportToCsv = () => {
-        const csvData = Papa.unparse(results);
-        const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+        const csvData = Papa.unparse(results, { columns: COLUNAS });
+        // O BOM faz o Excel abrir o arquivo como UTF-8 e preservar os acentos.
+        const blob = new Blob(['\uFEFF', csvData], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
         const url = URL.createObjectURL(blob);
         link.href = url;
@@ -92,10 +118,12 @@ export default function Home() {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+        URL.revokeObjectURL(url);
     };
 
     const optantes = results.filter(result => result['Opção pelo Simples'] === 'optante');
     const naoOptantes = results.filter(result => result['Opção pelo Simples'] === 'não optante');
+    const comErro = results.filter(result => result['Erro']);
 
     return (
         <div className="relative bg-gray-100 py-16 min-h-screen">
@@ -142,6 +170,12 @@ export default function Home() {
                     {error && (
                         <p className="text-red-600 text-center mt-6">
                             Erro ao processar o arquivo CSV: {error}
+                        </p>
+                    )}
+                    {comErro.length > 0 && (
+                        <p className="text-amber-700 text-center text-sm mb-8">
+                            {comErro.length} de {results.length} CNPJ(s) não puderam ser consultados.
+                            O motivo de cada um está na coluna &quot;Erro&quot; do CSV exportado.
                         </p>
                     )}
                     {results.length > 0 && (
