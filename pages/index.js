@@ -36,7 +36,10 @@ export default function Home() {
 
     const fetchCNPJ = async (cnpj) => {
         try {
-            const response = await fetch(`https://minhareceita.org/${cnpj}`);
+            // Usa só os dígitos na URL: o conteúdo vem de um CSV enviado pelo
+            // usuário e não deve conseguir alterar o caminho/consulta da API.
+            const cnpjNumerico = cnpj.replace(/\D/g, '');
+            const response = await fetch(`https://minhareceita.org/${encodeURIComponent(cnpjNumerico)}`);
             if (!response.ok) {
                 throw new Error(`a consulta retornou HTTP ${response.status}`);
             }
@@ -108,7 +111,9 @@ export default function Home() {
     };
 
     const exportToCsv = () => {
-        const csvData = Papa.unparse(results, { columns: COLUNAS });
+        // escapeFormulae evita injeção de fórmulas (=, +, -, @) ao abrir no Excel,
+        // já que os valores vêm de um CSV do usuário e de uma API externa.
+        const csvData = Papa.unparse(results, { columns: COLUNAS, escapeFormulae: true });
         // O BOM faz o Excel abrir o arquivo como UTF-8 e preservar os acentos.
         const blob = new Blob(['\uFEFF', csvData], { type: 'text/csv;charset=utf-8;' });
         const link = document.createElement('a');
